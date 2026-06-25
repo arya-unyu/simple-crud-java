@@ -41,7 +41,7 @@ public ResponseEntity<Object> createbook(@RequestBody Book newBook) {
     return new ResponseEntity<>("Buku berhasil ditambahkan", httpStatus.CREATED);
 }
 
-@PutMappin("/{id}")
+@PutMapping("/{id}")
 public ResponseEntity<Object> updateBook(@PathVariable int id, @RequestBody Book updatedBook) {
     for(Book book : books) {
         if(book.getId() == id) {
@@ -52,3 +52,5 @@ public ResponseEntity<Object> updateBook(@PathVariable int id, @RequestBody Book
     }
     return new ResponseEntity<>("Buku tidak ditemukan", httpStatus.NOT_FOUND);
 }
+
+@DeleteMapping
