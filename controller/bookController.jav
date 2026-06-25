@@ -38,7 +38,7 @@ public ResponseEntity<Object> createbook(@RequestBody Book newBook) {
     int nextId = books.isEmpty() ? 1 : books.get(books.size() - 1).getId() + 1;
     newBook.setId(nextId);
     books.add(newBook);
-    return new ResponseEntity<>("Buku berhasil ditambahkan", httpStatus.CREATED);
+    return new ResponseEntity<>("Buku berhasil ditambahkan", HttpStatus.CREATED);
 }
 
 @PutMapping("/{id}")
@@ -54,3 +54,12 @@ public ResponseEntity<Object> updateBook(@PathVariable int id, @RequestBody Book
 }
 
 @DeleteMapping
+public ResponseEntity<Object> deleteBook(@PathVariable int id, @RequestBody Book deletedBook) {
+    for(Book book : books) {
+        if(book.getId() == id) {
+            books.remove(book);
+            return new ResponseEntity<>("Buku berhasil dihapus", HttpStatus.OK);
+        }
+    }
+    return new ResponseEntity<>("Buku tidak ditemukan", HttpStatus.NOT_FOUND);
+}
